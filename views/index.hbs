@@ -2,23 +2,41 @@
 
   <div class="pageContent">
 
-  <h3 class="pageSubheading">Welcome to the ModelBricks project</h3>
+  <h3 class="pageSubheading">Welcome to the ModelBricks Project</h3>
 
 <table>
-<tr><td>
+<tr>
 <td style="width: 200px;">
-            <p style="margin:4px;"><br /><img src="/images/bricks.png" height="150"/></p>
+    <p style="margin:4px;"><br /><img src="/images/bricks.png" height="150"/></p>
 </td>
+
 <td>
-<p style="margin:4px;"> Many computational models in biology are built and intended for "single-use"; the modeling assumptions and
-descriptions of model elements must be found in the corresponding paper. Expanding models to new and more complex situations is non-trivial.
-As a result, new models are almost always created anew, repeating literature searches for kinetic parameters, initial conditions and modeling specifics. It is akin to building a brick house starting with a pile of clay. Here we present a database of <b>ModelBricks - well-annotated, reusable component mechanisms that can be assembled into
-        fully annotated mathematical models for cell biology</b>.
-        <br>
-        <div id="demobox" style="cursor: pointer;" onclick="window.location='/curatedList/bmName=&bmId=&category=all&owner=ModelBrick&savedLow=&savedHigh=&page=1&orderBy=date_desc=&advanced=false&maxModels=100';">
-            <p><b><font color="white">Browse ModelBricks</font></b></p>
-        </div>
-</td></tr>
+
+<p style="margin:4px;">
+Biological computational models are often created for single-use purposes.
+Their assumptions and descriptions are usually found only in research papers.
+</p>
+
+<p style="margin:4px;">
+Reusing or extending these models is difficult and often requires repeating work,
+such as searching for kinetic parameters, initial conditions, and modeling details.
+</p>
+
+<p style="margin:4px;">
+ModelBricks provides a solution by offering 
+<b>well-annotated, reusable biological components</b> that can be assembled into
+fully annotated mathematical models for cell biology.
+</p>
+
+<br>
+
+<div id="demobox" style="cursor: pointer;" 
+onclick="window.location='/curatedList/bmName=&bmId=&category=all&owner=ModelBrick&savedLow=&savedHigh=&page=1&orderBy=date_desc=&advanced=false&maxModels=100';">
+    <p><b><span style="color:white; font-weight:bold;">Browse ModelBricks →</span></b></p>
+</div>
+
+</td>
+</tr>
 </table>
 
 <h3 class="pageSubheading">Each ModelBrick contains</h3>
@@ -26,51 +44,64 @@ As a result, new models are almost always created anew, repeating literature sea
 <table>
 <tr><td>
 <p style="margin:4px;">
-1. Sets of <b>molecules (species)</b> uniquely identified with universal identifiers, their initial concentrations and transport properties.
+1. <b>Molecules (species)</b> uniquely identified with universal identifiers, including their initial concentrations and transport properties.
 </p>
 </td></tr>
+
 <tr><td>
 <p style="margin:4px;">
-2. <b>Reaction(s) (changes in state)</b> identified by known biochemical mechanisms and defined by a flux reaction with parameters for
-forward and reverse rates (<b>kf</b> and <b>kr</b>).
-Flux terms can be simple mass action kinetics or complex functions.
+2. <b>Reactions (state changes)</b> defined by known biochemical mechanisms, with forward (<b>kf</b>) and reverse (<b>kr</b>) rate parameters.
+Flux terms may follow simple mass action kinetics or complex functions.
 </p>
 </td></tr>
+
 <tr><td>
 <p style="margin:4px;">
-3. An identified cellular <b>Compartment(s)</b> where the reaction occurs and the species reside.
+3. <b>Cellular compartments</b> where reactions occur and species are located.
 </p>
 </td></tr>
+
 <tr><td>
 <p style="margin:4px;">
-4. <b>A Publication ID</b> or other identifier of the author and peer-review status for the original model from which a ModelBrick is derived
+4. <b>Publication ID</b> or author reference indicating the origin and validation of the model.
 </p>
 </td></tr>
 </table>
 
 <br>
-<p style="margin:4px;"><br /><img src="/images/ModelBrickStructure.jpg" height="450"/></p>
-</br>
+
+<p style="margin:4px;">
+<br /><img src="/images/ModelBrickStructure.jpg" height="450"/>
+</p>
+
+<br>
 
 <h3 class="pageSubheading">ModelBricks can be</h3>
 
 <table>
 <tr><td>
 <p style="margin:4px;">
-1. Downloaded in mulltiple formats, such as SBML or VCML formats
+1. Downloaded in multiple formats such as SBML or VCML.
 </p>
 </td></tr>
+
 <tr><td>
 <p style="margin:4px;">
-2. Inserted into an existing SBML compatible model including all annotations and defined parameters.
+2. Inserted into existing SBML-compatible models with all annotations and parameters included.
 </p>
 </td></tr>
+
 <tr><td>
 <p style="margin:4px;">
-3.Created from existing models and submitted for inclusion in the repository.
+3. Created from existing models and submitted to the repository.
 </p>
 </td></tr>
 </table>
-        <div id="demobox" style="cursor: pointer;" onclick="window.location='/curatedList/bmName=&bmId=&category=all&owner=ModelBrick&savedLow=&savedHigh=&page=1&orderBy=date_desc=&advanced=false&maxModels=100';">
-<p><b><font color="white">Browse ModelBricks</font></b></p>
+
+<div id="demobox" style="cursor: pointer;" 
+onclick="window.location='/curatedList/bmName=&bmId=&category=all&owner=ModelBrick&savedLow=&savedHigh=&page=1&orderBy=date_desc=&advanced=false&maxModels=100';">
+    <p><b><span style="color:white; font-weight:bold;">Browse ModelBricks →</span></b></p>
+</div>
+
+</div>
 </div>
