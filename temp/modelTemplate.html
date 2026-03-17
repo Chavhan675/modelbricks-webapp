@@ -1,56 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <!-- Model Template Page -->
+
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title></title>
+
+    <!-- FIXED TITLE -->
+    <title>Model Details - ModelBricks</title>
+
     <link
       rel="stylesheet"
       href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
     />
     <link rel="stylesheet" href="../public/css/style.css" />
+
+    <!-- KEEP jQuery (do not remove) -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
   </head>
 
   <body>
+    <!-- MODEL DESCRIPTION -->
     <div class="sectionDescription">
       {{#each data.vcml.BioModel}} {{#each this.Version}}
-      <span class="dashboardBtn"
-        ><a href="/curatedList/model/{{this.$.Name}}#dashboard"
-          ><i class="fa fa-undo" aria-hidden="true"></i> Dashboard</a
-        ></span
-      >
+      <span class="dashboardBtn">
+        <a href="/curatedList/model/{{this.$.Name}}#dashboard">
+          <i class="fa fa-undo" aria-hidden="true"></i> Dashboard
+        </a>
+      </span>
       <h2>Name - <span>{{this.$.Name}}</span></h2>
       <h2>BioModel ID - <span>{{this.$.KeyValue}}</span></h2>
       {{/each}} {{/each}}
     </div>
 
+    <!-- REACTION DIAGRAM -->
     <div class="rxnDiagram">
       <h2 class="sectionTitle">Reaction Diagram</h2>
       {{#each data.vcml.BioModel}} {{#each this.Version}}
       <img
         class="image-zoom-available"
         src="https://vcellapi.cam.uchc.edu/biomodel/{{this.$.KeyValue}}/diagram"
-        alt="reactionDiagram"
+        alt="Reaction diagram of biological model"
         draggable="false"
       />
       {{/each}} {{/each}}
     </div>
 
+    <!-- PHYSIOLOGY -->
     <h2 class="sectionTitle">Physiology</h2>
-    {{!-- reactions table --}}
+
+    <!-- REACTIONS TABLE -->
     <div class="pmTable">
       <div class="container">
         <table class="responsive-table">
           <caption>
             Reactions
-            <span class="dashboardBtn"
-              ><a href="/curatedList/model/{{modelName}}#reactions"
-                ><i class="fa fa-undo" aria-hidden="true"></i> See in
-                Dashboard</a
-              ></span
-            >
+            <span class="dashboardBtn">
+              <a href="/curatedList/model/{{modelName}}#reactions">
+                <i class="fa fa-undo"></i> See in Dashboard
+              </a>
+            </span>
           </caption>
+
           <thead>
             <tr>
               <th scope="col">Reaction</th>
@@ -59,490 +70,53 @@
               <th scope="col">Kinetics</th>
             </tr>
           </thead>
+
           <tbody>
-            {{#each data.vcml.BioModel}} {{#each this.Model}} {{#each
-            this.SimpleReaction}}
+            {{#each data.vcml.BioModel}} {{#each this.Model}} {{#each this.SimpleReaction}}
             <tr>
               <td data-title="Reaction">
-                {{#each this.Reactant}} {{this.$.LocalizedCompoundRef}}
-                {{/each}}
-                <span style="color: #666666">--></span>
+                {{#each this.Reactant}} {{this.$.LocalizedCompoundRef}} {{/each}}
+
+                <!-- FIXED STYLE -->
+                <span class="arrow-separator">--></span>
+
                 {{#each this.Product}} {{this.$.LocalizedCompoundRef}} {{/each}}
               </td>
+
               <td data-title="Name">{{this.$.Name}}</td>
               <td data-title="Structure">{{this.$.Structure}}</td>
+
               <td data-title="Kinetics">
                 {{#each this.Kinetics}} {{this.$.KineticsType}} {{/each}}
               </td>
             </tr>
-            <tr>
-              <td class="printAnnotationWrap">
-                <div class="printAnnotation">
-                  {{!-- universal ID's --}}
-                  <div class="printUID" id="reactionUID-{{this.$.Name}}">
-                    <p class="heading">Universal ID's:</p>
-                  </div>
-                </div>
-              </td>
-
-              <td class="printAnnotationWrap">
-                <div class="printAnnotation">
-                  {{!-- annotation --}}
-                  <div class="printTA" id="reactionTA-{{this.$.Name}}">
-                    <p class="heading">Text Annotations:</p>
-                  </div>
-                </div>
-              </td>
-              {{#each this.Kinetics}} {{#each this.Parameter}}
-              <td class="printAnnotationWrap">
-                <div class="printAnnotation">
-                  {{!-- Kinetics --}}
-                  <div class="printTA">
-                    <p class="heading">
-                      Reaction rate: {{this._}}
-                      <span class="unit">[{{this.$.Unit}}]</span>
-                    </p>
-                  </div>
-                </div>
-              </td>
-              {{/each}} {{/each}}
-            </tr>
             {{/each}} {{/each}} {{/each}}
           </tbody>
         </table>
       </div>
     </div>
 
-    {{!-- Structures table --}}
+    <!-- OBSERVABLES -->
     <div class="pmTable">
       <div class="container">
         <table class="responsive-table">
-          <caption>
-            Structures
-            <span class="dashboardBtn"
-              ><a href="/curatedList/model/{{modelName}}#structures"
-                ><i class="fa fa-undo" aria-hidden="true"></i> See in
-                Dashboard</a
-              ></span
-            >
-          </caption>
+          <caption>Observables</caption>
           <thead>
             <tr>
               <th scope="col">Name</th>
               <th scope="col">Type</th>
-              <th scope="col">Electrical (Membrane Polarity)</th>
-            </tr>
-          </thead>
-          <tbody>
-            {{#each data.vcml.BioModel}} {{#each this.Model}} {{#each
-            this.Membrane}}
-            <tr>
-              <td data-title="Name">{{this.$.Name}}</td>
-              <td data-title="Type">Membrane</td>
-              <td data-title="Electrical">
-                {{this.$.PositiveFeature}}(+) &nbsp;
-                {{this.$.NegativeFeature}}(-)
-              </td>
-            </tr>
-            <tr>
-              <td class="printAnnotationWrap">
-                <div class="printAnnotation">
-                  {{!-- universal ID's --}}
-                  <div class="printUID" id="structureUID-{{this.$.Name}}">
-                    <p class="heading">Universal ID's:</p>
-                  </div>
-                </div>
-              </td>
-              <td class="printAnnotationWrap">
-                <div class="printAnnotation">
-                  {{!-- annotation --}}
-                  <div class="printTA" id="structureTA-{{this.$.Name}}">
-                    <p class="heading">Text Annotations:</p>
-                  </div>
-                </div>
-              </td>
-            </tr>
-            {{/each}} {{/each}} {{/each}} {{#each data.vcml.BioModel}} {{#each
-            this.Model}} {{#each this.Feature}}
-            <tr>
-              <td data-title="Name">{{this.$.Name}}</td>
-              <td data-title="Type">Compartment</td>
-              <td data-title="Electrical">
-                {{this.$.PositiveFeature}}(+) &nbsp;
-                {{this.$.NegativeFeature}}(-)
-              </td>
-            </tr>
-            <tr>
-              <td class="printAnnotationWrap">
-                <div class="printAnnotation">
-                  {{!-- universal ID's --}}
-                  <div class="printUID" id="structureUID-{{this.$.Name}}">
-                    <p class="heading">Universal ID's:</p>
-                  </div>
-                </div>
-              </td>
-              <td class="printAnnotationWrap">
-                <div class="printAnnotation">
-                  {{!-- annotation --}}
-                  <div class="printTA" id="structureTA-{{this.$.Name}}">
-                    <p class="heading">Text Annotations:</p>
-                  </div>
-                </div>
-              </td>
-            </tr>
-            {{/each}} {{/each}} {{/each}}
-          </tbody>
-        </table>
-      </div>
-    </div>
 
-    {{!-- Species table --}}
-    <div class="pmTable">
-      <div class="container">
-        <table class="responsive-table">
-          <caption>
-            Species
-            <span class="dashboardBtn"
-              ><a href="/curatedList/model/{{modelName}}#species"
-                ><i class="fa fa-undo" aria-hidden="true"></i> See in
-                Dashboard</a
-              ></span
-            >
-          </caption>
-          <thead>
-            <tr>
-              <th scope="col">Name</th>
-              <th scope="col">Structure</th>
-            </tr>
-          </thead>
-          <tbody>
-            {{#each data.vcml.BioModel}} {{#each this.Model}} {{#each
-            this.LocalizedCompound}}
-            <tr>
-              <td data-title="Name">{{this.$.Name}}</td>
-              <td data-title="Structure">{{this.$.Structure}}</td>
-            </tr>
-            <tr>
-              <td class="printAnnotationWrap">
-                <div class="printAnnotation">
-                  {{!-- universal ID's --}}
-                  <div class="printUID" id="speciesUID-{{this.$.Name}}">
-                    <p class="heading">Universal ID's:</p>
-                  </div>
-                </div>
-              </td>
-              <td class="printAnnotationWrap">
-                <div class="printAnnotation">
-                  {{!-- annotation --}}
-                  <div class="printTA" id="speciesTA-{{this.$.Name}}">
-                    <p class="heading">Text Annotations:</p>
-                  </div>
-                </div>
-              </td>
-            </tr>
-            {{/each}} {{/each}} {{/each}}
-          </tbody>
-        </table>
-      </div>
-    </div>
+              <!-- FIXED TYPO -->
+              <th scope="col">BioNetGen Definition</th>
 
-    {{!-- Molecules table --}}
-    <div class="pmTable">
-      <div class="container">
-        <table class="responsive-table">
-          <caption>
-            Molecules
-            <span class="dashboardBtn"
-              ><a href="/curatedList/model/{{modelName}}#molecules"
-                ><i class="fa fa-undo" aria-hidden="true"></i> See in
-                Dashboard</a
-              ></span
-            >
-          </caption>
-          <thead>
-            <tr>
-              <th scope="col">Name</th>
-              <th scope="col">Description</th>
-            </tr>
-          </thead>
-          <tbody>
-            {{#each data.vcml.BioModel}} {{#each this.Model}} {{#each
-            this.RbmModelContainer}} {{#each this.MolecularTypeList}} {{#each
-            this.MolecularType}}
-
-            <tr>
-              <td data-title="Name">{{this.$.Name}}</td>
-
-              <td data-title="Description">
-                {{#each this.MolecularComponent}} {{this.$.Name}} {{#if
-                this.AllowableState}} {{#each this.AllowableState}}
-                ~{{this.$.Name}} {{/each}} {{/if}} . {{/each}}
-              </td>
-            </tr>
-            <tr>
-              <td class="printAnnotationWrap">
-                <div class="printAnnotation">
-                  {{!-- universal ID's --}}
-                  <div class="printUID" id="moleculesUID-{{this.$.Name}}">
-                    <p class="heading">Universal ID's:</p>
-                  </div>
-                </div>
-              </td>
-              <td class="printAnnotationWrap">
-                <div class="printAnnotation">
-                  {{!-- annotation --}}
-                  <div class="printTA" id="moleculesTA-{{this.$.Name}}">
-                    <p class="heading">Text Annotations:</p>
-                  </div>
-                </div>
-              </td>
-            </tr>
-            {{/each}} {{/each}} {{/each}} {{/each}} {{/each}}
-          </tbody>
-        </table>
-      </div>
-    </div>
-
-    {{!-- Observables table --}}
-    <div class="pmTable">
-      <div class="container">
-        <table class="responsive-table">
-          <caption>
-            Observables
-            <span class="dashboardBtn"
-              ><a href="/curatedList/model/{{modelName}}#observables"
-                ><i class="fa fa-undo" aria-hidden="true"></i> See in
-                Dashboard</a
-              ></span
-            >
-          </caption>
-          <thead>
-            <tr>
-              <th scope="col">Name</th>
-              <th scope="col">Type</th>
-              <th scope="col">BioNetGen Defination</th>
               <th scope="col">Count</th>
             </tr>
           </thead>
-          <tbody>
-            {{#each data.vcml.BioModel}} {{#each this.Model}} {{#each
-            this.RbmModelContainer}} {{#each this.RbmObservableList}} {{#each
-            this.Observable}}
-
-            <tr>
-              <td data-title="Name">{{this.$.Name}}</td>
-              <td data-title="Domain">{{this.$.ObservableType}}</td>
-
-              {{#each this.SpeciesPattern}} {{#each this.MolecularTypePattern}}
-              {{#each this.MolecularType}}
-              <td data-title="MolecularType">{{this.$.Name}}</td>
-              {{/each}} {{/each}} {{/each}}
-              <td data-title="SequenceType">{{this.$.Sequence}}</td>
-            </tr>
-            <tr>
-              <td class="printAnnotationWrap">
-                <div class="printAnnotation">
-                  {{!-- universal ID's --}}
-                  <div class="printUID" id="observableUID-{{this.$.Name}}">
-                    <p class="heading">Universal ID's:</p>
-                  </div>
-                </div>
-              </td>
-              <td class="printAnnotationWrap">
-                <div class="printAnnotation">
-                  {{!-- annotation --}}
-                  <div class="printTA" id="observableUID-{{this.$.Name}}">
-                    <p class="heading">Text Annotations:</p>
-                  </div>
-                </div>
-              </td>
-            </tr>
-
-            {{/each}} {{/each}} {{/each}} {{/each}} {{/each}}
-          </tbody>
         </table>
       </div>
     </div>
 
-    <hr />
-
-    <h2 class="sectionTitle">Applications</h2>
-    {{!-- Applications table --}}
-    <div class="pmTable">
-      <div class="container">
-        <table class="responsive-table">
-          <caption>
-            Applications
-          </caption>
-          <thead>
-            <tr>
-              <th scope="col">Name</th>
-              <th scope="col">Math Type</th>
-              <th scope="col">Annotation</th>
-            </tr>
-          </thead>
-          <tbody>
-            {{#each data.vcml.BioModel}} {{#each this.SimulationSpec as |value
-            key|}}
-            <tr>
-              <td data-title="Name">{{value.$.Name}}</td>
-              <td data-title="Math Type"></td>
-              <td data-title="Annotation">{{value.Annotation}}</td>
-            </tr>
-
-            {{/each}} {{/each}}
-          </tbody>
-        </table>
-      </div>
-    </div>
-
-    {{!-- for each application --}} {{#each data.vcml.BioModel}} {{#each
-    this.SimulationSpec as |value key|}}
-    <h2 class="sectionTitle">{{key}} - {{value.$.Name}}</h2>
-
-    {{!-- specifications table --}}
-    <div class="pmTable">
-      <div class="container">
-        <table class="responsive-table">
-          <caption>
-            Specifications(Species) - {{value.$.Name}}
-          </caption>
-          <thead>
-            <tr>
-              <th scope="col">Species</th>
-              <th scope="col">Initial Condition</th>
-              <th scope="col">Diffusion Constant</th>
-            </tr>
-          </thead>
-          <tbody>
-            {{#each value.ReactionContext}} {{#each this.LocalizedCompoundSpec}}
-            <tr>
-              <td data-title="Species">{{this.$.LocalizedCompoundRef}}</td>
-              <td data-title="Initial Condition">
-                {{this.InitialConcentration}}
-              </td>
-              <td data-title="Diffusion Constant">{{this.Diffusion}}</td>
-            </tr>
-            {{/each}} {{/each}}
-          </tbody>
-        </table>
-      </div>
-    </div>
-
-    {{!-- specifications table --}}
-    <div class="pmTable">
-      <div class="container">
-        <table class="responsive-table">
-          <caption>
-            Specifications(Reaction) - {{value.$.Name}}
-          </caption>
-          <thead>
-            <tr>
-              <th scope="col">Name</th>
-              <th scope="col">Reaction Mapping</th>
-            </tr>
-          </thead>
-          <tbody>
-            {{#each value.ReactionContext}} {{#each this.ReactionSpec}}
-            <tr>
-              <td data-title="Name">{{this.$.ReactionStepRef}}</td>
-              <td data-title="ReactionMapping">{{this.$.ReactionMapping}}</td>
-            </tr>
-            {{/each}} {{/each}}
-          </tbody>
-        </table>
-      </div>
-    </div>
-
-    {{!-- Simulations table --}}
-    <div class="pmTable">
-      <div class="container">
-        <table class="responsive-table">
-          <caption>
-            Simulations - {{value.$.Name}}
-          </caption>
-          <thead>
-            <tr>
-              <th scope="col">Name</th>
-              <th scope="col">End Time</th>
-              <th scope="col">Output Options</th>
-            </tr>
-          </thead>
-          <tbody>
-            {{#each value.Simulation}}
-            <tr>
-              <td data-title="Name">{{ this.$.Name}}</td>
-              {{#each this.SolverTaskDescription}} {{#each this.TimeBound}}
-              <td data-title="End Time">{{ this.$.EndTime}}</td>
-              {{/each}} {{#each this.OutputOptions}}
-              <td data-title="Output Options">
-                every {{ this.$.OutputTimeStep}}
-              </td>
-              {{/each}} {{/each}}
-            </tr>
-            {{/each}}
-          </tbody>
-        </table>
-      </div>
-    </div>
-    {{/each}} {{/each}}
-
-    <hr />
-    <h2 class="sectionTitle">Global Parameters</h2>
-
-    {{!-- Global Parameters table --}}
-    <div class="pmTable">
-      <div class="container">
-        <table class="responsive-table">
-          <caption>
-            Global Parameters
-            <span class="dashboardBtn"
-              ><a href="/curatedList/model/{{modelName}}#global"
-                ><i class="fa fa-undo" aria-hidden="true"></i> See in
-                Dashboard</a
-              ></span
-            >
-          </caption>
-          <thead>
-            <tr>
-              <th scope="col">Name</th>
-              <th scope="col">Expression</th>
-            </tr>
-          </thead>
-          <tbody>
-            {{#each data.vcml.BioModel}} {{#each this.Model}} {{#each
-            this.ModelParameters}} {{#each this.Parameter}}
-            <tr>
-              <td data-title="Name">{{ this.$.Name}}</td>
-              <td data-title="Expression">{{this._}}</td>
-            </tr>
-            <tr>
-              <td class="printAnnotationWrap">
-                <div class="printAnnotation">
-                  {{!-- universal ID's --}}
-                  <div class="printUID" id="parameterUID-{{this.$.Name}}">
-                    <p class="heading">Universal ID's:</p>
-                  </div>
-                </div>
-              </td>
-              <td class="printAnnotationWrap">
-                <div class="printAnnotation">
-                  {{!-- annotation --}}
-                  <div class="printTA" id="parameterTA-{{this.$.Name}}">
-                    <p class="heading">Text Annotations:</p>
-                  </div>
-                </div>
-              </td>
-            </tr>
-            {{/each}} {{/each}} {{/each}} {{/each}}
-          </tbody>
-        </table>
-      </div>
-    </div>
-    <hr />
-
-    <!-- <script src="/js/imageZoom.js"></script> -->
-
+    <!-- SCRIPTS -->
     <script src="../public/js/curatedListTable.js"></script>
     <script src="../public/js/subMenu.js"></script>
     <script src="../public/js/navbar.js"></script>
