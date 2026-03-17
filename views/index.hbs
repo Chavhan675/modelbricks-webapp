@@ -1,12 +1,17 @@
+<!-- Main homepage template for ModelBricks WebApp -->
+
+<!-- Main container for homepage content -->
 <div class="infoPages">
 
   <div class="pageContent">
 
+  <!-- Welcome section heading -->
   <h3 class="pageSubheading">Welcome to the ModelBricks project</h3>
 
 <table>
 <tr><td>
 <td style="width: 200px;">
+            <!-- Image representing ModelBricks -->
             <p style="margin:4px;"><br /><img src="/images/bricks.png" height="150"/></p>
 </td>
 <td>
@@ -15,12 +20,15 @@ descriptions of model elements must be found in the corresponding paper. Expandi
 As a result, new models are almost always created anew, repeating literature searches for kinetic parameters, initial conditions and modeling specifics. It is akin to building a brick house starting with a pile of clay. Here we present a database of <b>ModelBricks - well-annotated, reusable component mechanisms that can be assembled into
         fully annotated mathematical models for cell biology</b>.
         <br>
+
+        <!-- Button to browse ModelBricks -->
         <div id="demobox" style="cursor: pointer;" onclick="window.location='/curatedList/bmName=&bmId=&category=all&owner=ModelBrick&savedLow=&savedHigh=&page=1&orderBy=date_desc=&advanced=false&maxModels=100';">
             <p><b><font color="white">Browse ModelBricks</font></b></p>
         </div>
 </td></tr>
 </table>
 
+<!-- Section describing ModelBrick components -->
 <h3 class="pageSubheading">Each ModelBrick contains</h3>
 
 <table>
@@ -49,15 +57,19 @@ Flux terms can be simple mass action kinetics or complex functions.
 </table>
 
 <br>
+
+<!-- Diagram showing ModelBrick structure -->
 <p style="margin:4px;"><br /><img src="/images/ModelBrickStructure.jpg" height="450"/></p>
+
 </br>
 
+<!-- Section describing usage of ModelBricks -->
 <h3 class="pageSubheading">ModelBricks can be</h3>
 
 <table>
 <tr><td>
 <p style="margin:4px;">
-1. Downloaded in mulltiple formats, such as SBML or VCML formats
+1. Downloaded in multiple formats, such as SBML or VCML formats
 </p>
 </td></tr>
 <tr><td>
@@ -67,10 +79,12 @@ Flux terms can be simple mass action kinetics or complex functions.
 </td></tr>
 <tr><td>
 <p style="margin:4px;">
-3.Created from existing models and submitted for inclusion in the repository.
+3. Created from existing models and submitted for inclusion in the repository.
 </p>
 </td></tr>
 </table>
-        <div id="demobox" style="cursor: pointer;" onclick="window.location='/curatedList/bmName=&bmId=&category=all&owner=ModelBrick&savedLow=&savedHigh=&page=1&orderBy=date_desc=&advanced=false&maxModels=100';">
+
+<!-- Bottom navigation button -->
+<div id="demobox" style="cursor: pointer;" onclick="window.location='/curatedList/bmName=&bmId=&category=all&owner=ModelBrick&savedLow=&savedHigh=&page=1&orderBy=date_desc=&advanced=false&maxModels=100';">
 <p><b><font color="white">Browse ModelBricks</font></b></p>
 </div>
